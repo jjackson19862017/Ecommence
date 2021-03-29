@@ -20,12 +20,12 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function () {
-    Route::get('/login', [AdminController::class, 'loginForm']);
+    Route::get('/login', [AdminController::class, 'loginForm'])->name('admin.loginform');
     Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
 });
 
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
-    return view('dashboard');
+    return view('admin.index');
 })->name('dashboard');
 
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
@@ -35,6 +35,9 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
 
 //User Dashboard
 Route::get('/user/logout', [MainUserController::class, 'logout'])->name('user.logout');
+
+//Admin Dashboard
+Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 
 
 require __DIR__ . '/auth.php';
