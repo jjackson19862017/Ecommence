@@ -3,6 +3,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <div class="row" style="padding: 20px" ;>
         <div class="col-md-6">
+            <h3>Update Profile</h3>
+
             <form action="{{route('profile.update')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">

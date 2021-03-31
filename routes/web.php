@@ -38,6 +38,8 @@ Route::get('/user/logout', [MainUserController::class, 'logout'])->name('user.lo
 Route::get('/user/profile', [MainUserController::class, 'show'])->name('user.profile');
 Route::get('/user/profile/edit', [MainUserController::class, 'edit'])->name('profile.edit');
 Route::post('/user/profile/update', [MainUserController::class, 'update'])->name('profile.update');
+Route::post('/user/password/update', [MainUserController::class, 'passwordUpdate'])->name('password.update');
+Route::get('/user/password/view', [MainUserController::class, 'passwordView'])->name('user.password.view');
 
 //Admin Dashboard
 Route::get('/admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
