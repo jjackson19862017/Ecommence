@@ -5,7 +5,7 @@
         <div class="card-body">
             <h4 class="card-title">User Name: {{$user->name}}</h4>
             <p class="card-text">User Email: {{$user->email}}</p>
-            <a href="" class="btn btn-primary">Edit Profile</a>
+            <a href="{{route('profile.edit')}}" class="btn btn-primary">Edit Profile</a>
         </div>
     </div>
 @endsection
