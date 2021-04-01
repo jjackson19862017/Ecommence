@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MainUserController;
 use App\Http\Controllers\MainAdminController;
+use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,7 +55,7 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->group(function(){
     Route::get('/admin/password/view', [MainAdminController::class, 'passwordView'])->name('admin.password.view');
 
     //Categorys
-
+    Route::get('/admin/category', [CategoryController::class, 'index'])->name('categorys.index');
 });
 
 

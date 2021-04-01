@@ -38,28 +38,29 @@
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{asset('adminbackend/css/starlight.css')}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css"/>
+
+    <link href="{{asset('adminbackend/lib/highlightjs/github.css')}}" rel="stylesheet">
+    <link href="{{asset('adminbackend/lib/datatables/jquery.dataTables.css')}}" rel="stylesheet">
+    <link href="{{asset('adminbackend/lib/select2/css/select2.min.css')}}" rel="stylesheet">
+
+
+
+
 </head>
 
 <body>
 
-    @include('admin.body.sidebar')
+@include('admin.body.sidebar')
 
-    @include('admin.body.header')
+@include('admin.body.header')
 
-    <!-- ########## START: MAIN PANEL ########## -->
-    <div class="sl-mainpanel">
+<!-- ########## START: MAIN PANEL ########## -->
+<div class="sl-mainpanel">
 
     @yield('admin')
 
     @include('admin.body.footer')
-
-
-
-
-
-
-
 
 
     <script src="{{asset('adminbackend/lib/jquery/jquery.js')}}"></script>
@@ -79,27 +80,69 @@
     <script src="{{asset('adminbackend/js/starlight.js')}}"></script>
     <script src="{{asset('adminbackend/js/ResizeSensor.js')}}"></script>
     <script src="{{asset('adminbackend/js/dashboard.js')}}"></script>
-        <!-- Toaster -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <!-- Toaster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
-        <script>
-            @if(Session::has('message'))
-            var type = "{{Session::get('alert-type','info')}}"
-            switch (type){
-                case 'info':
-                    toastr.info(" {{Session::get('message')}}");
-                    break;
-                case 'success':
-                    toastr.success(" {{Session::get('message')}}");
-                    break;
-                case 'warning':
-                    toastr.warning(" {{Session::get('message')}}");
-                    break;
-                case 'error':
-                    toastr.error(" {{Session::get('message')}}");
-                    break;
-            }
-            @endif
-        </script>
+    <script>
+        @if(Session::has('message'))
+        var type = "{{Session::get('alert-type','info')}}"
+        switch (type) {
+            case 'info':
+                toastr.info(" {{Session::get('message')}}");
+                break;
+            case 'success':
+                toastr.success(" {{Session::get('message')}}");
+                break;
+            case 'warning':
+                toastr.warning(" {{Session::get('message')}}");
+                break;
+            case 'error':
+                toastr.error(" {{Session::get('message')}}");
+                break;
+        }
+        @endif
+    </script>
+
+    <script>
+        $(document).on("click","#delete", function(e){
+           e.preventDefault();
+           var link = $(this).attr("href");
+           swal({
+               title: "Are you sure?",
+               text: "Once deleted, this will be permanently deleted!",
+               icon: "warning",
+               buttons: true,
+               dangerMode: true,
+           })
+            .then((willDelete) => {
+                if(willDelete) {
+                    window.location.href = link;
+                } else {
+                    swal("Not Deleted");
+                }
+            });
+        });
+    </script>
+
+    <script src="{{asset('adminbackend/lib/highlightjs/highlight.pack.js')}}"></script>
+    <script src="{{asset('adminbackend/lib/datatables/jquery.dataTables.js')}}"></script>
+    <script src="{{asset('adminbackend/lib/datatables-responsive/dataTables.responsive.js')}}"></script>
+    <script src="{{asset('adminbackend/lib/select2/js/select2.min.js')}}"></script>
+
+    <script>
+
+            $('#datatable1').DataTable({
+                responsive: true,
+                language: {
+                    searchPlaceholder: 'Search...',
+                    sSearch: '',
+                    lengthMenu: '_MENU_ items/page',
+                }
+            });
+
+
+    </script>
+
 </body>
 </html>
