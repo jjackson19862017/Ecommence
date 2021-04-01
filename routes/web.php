@@ -55,7 +55,22 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->group(function(){
     Route::get('/admin/password/view', [MainAdminController::class, 'passwordView'])->name('admin.password.view');
 
     //Categorys
-    Route::get('/admin/category', [CategoryController::class, 'index'])->name('categorys.index');
+    Route::get('/admin/category', [CategoryController::class, 'index'])->name('category.index');
+    Route::post('/admin/category/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/admin/category/edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::post('/admin/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+    Route::get('/admin/category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
+
+
+    //Brands
+    // Brand Controller
+    Route::get('/admin/brand', [BrandController::class, 'index'])->name('brand.index');
+    Route::post('/admin/brand/add', [BrandController::class, 'store'])->name('brand.store');
+    Route::get('/admin/brand/edit/{id}', [BrandController::class, 'edit'])->name('brand.edit');
+    Route::post('/admin/brand/update/{id}', [BrandController::class, 'update'])->name('brand.update');
+    Route::get('/admin/brand/delete/{id}', [BrandController::class, 'destroy'])->name('brand.delete');
+
+
 });
 
 

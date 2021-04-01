@@ -9,7 +9,7 @@
         </div><!-- sl-page-title -->
 
         <div class="card pd-20 pd-sm-40">
-            <h6 class="card-body-title">Category List <a href="" class="btn btn-sm btn-warning float-right">Add New</a></h6>
+            <h6 class="card-body-title">Category List <a class="btn btn-sm btn-warning float-right" data-toggle="modal" data-target="#addCategory">Add New</a></h6>
 
             <div class="table-wrapper">
                 <table id="datatable1" class="table display responsive nowrap">
@@ -24,11 +24,11 @@
                     <tbody>
                     @foreach($category as $item)
                         <tr>
-                            <td>Tiger{{$item->id}}</td>
-                            <td>Woods{{$item->name}}</td>
+                            <td>{{$item->id}}</td>
+                            <td>{{$item->category_name}}</td>
                             <td>
-                                <a href="" class="btn btn-sm btn-info">Edit</a>
-                                <a href=""id="delete" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="{{route('category.edit',$item->id)}}" class="btn btn-sm btn-info">Edit</a>
+                                <a href="{{route('category.delete',$item->id)}}" id="delete" class="btn btn-sm btn-danger">Delete</a>
                             </td>
 
                         </tr>
@@ -41,6 +41,41 @@
     </div>
 
 
+    <div id="addCategory" class="modal fade">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content tx-size-sm">
+                <div class="modal-header pd-x-20">
+                    <h6 class="tx-14 mg-b-0 tx-uppercase tx-inverse tx-bold">Add Category</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <p class="ml-0">{{$error}}</p>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                <form action="{{route('category.store')}}" method="post">
+                    @csrf
+                <div class="modal-body pd-20">
+                    <div class="form-group">
+                        <label for="category_name">Category Name</label>
+                        <input type="text" class="form-control" name="category_name" id="add" aria-describedby="helpId"
+                               placeholder="Category Name">
+                    </div>
+                </div><!-- modal-body -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-info pd-x-20">Add</button>
+                    <button type="button" class="btn btn-secondary pd-x-20" data-dismiss="modal">Cancel</button>
+                </div>
+                </form>
+            </div>
+        </div><!-- modal-dialog -->
+    </div><!-- modal -->
 
 
 
