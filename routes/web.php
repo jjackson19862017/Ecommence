@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.index');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['admin:admin']], function () {
@@ -52,6 +52,9 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->group(function(){
     Route::post('/admin/profile/update', [MainAdminController::class, 'update'])->name('admin.profile.update');
     Route::post('/admin/password/update', [MainAdminController::class, 'passwordUpdate'])->name('admin.password.update');
     Route::get('/admin/password/view', [MainAdminController::class, 'passwordView'])->name('admin.password.view');
+
+    //Categorys
+
 });
 
 
