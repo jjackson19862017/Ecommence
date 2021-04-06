@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -95,6 +96,16 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->group(function(){
     Route::post('/admin/newsletter/update/{id}', [NewsletterController::class, 'update'])->name('newsletter.update');
     Route::get('/admin/newsletter/delete/{id}', [NewsletterController::class, 'destroy'])->name('newsletter.delete');
 
+    //Product
+    Route::get('/admin/product', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/admin/product/add', [ProductController::class, 'create'])->name('product.add');
+    Route::post('/admin/product/store', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/admin/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::get('/admin/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+
+    // Ajax Requests
+    route::get('/get/subcategory/{category_id}', [ProductController::class,'getsubcat']);
 });
 
 // Front end Routes

@@ -36,9 +36,15 @@
     <link href="{{asset('adminbackend/lib/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet">
     <link href="{{asset('adminbackend/lib/rickshaw/rickshaw.min.css')}}" rel="stylesheet">
 
+    <!-- Tag Input CDN -->
+    <link href="https://cdn.jsdelivr.net/bootstrap.tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet"/>
+
+
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{asset('adminbackend/css/starlight.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css"/>
+    <link rel="stylesheet" href="{{asset('adminbackend/lib/summernote/summernote-bs4.css')}}" />
+
 
     <link href="{{asset('adminbackend/lib/highlightjs/github.css')}}" rel="stylesheet">
     <link href="{{asset('adminbackend/lib/datatables/jquery.dataTables.css')}}" rel="stylesheet">
@@ -143,6 +149,8 @@
 
 
     </script>
+    <script src="{{asset('adminbackend/lib/medium-editor/medium-editor.js')}}"></script>
+    <script src="{{asset('adminbackend/lib/summernote/summernote-bs4.min.js')}}"></script>
 
 </body>
 </html>
