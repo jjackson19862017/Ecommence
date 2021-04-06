@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\MainUserController;
 use App\Http\Controllers\MainAdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\BrandController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,6 +72,12 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->group(function(){
     Route::post('/admin/brand/update/{id}', [BrandController::class, 'update'])->name('brand.update');
     Route::get('/admin/brand/delete/{id}', [BrandController::class, 'destroy'])->name('brand.delete');
 
+    //Sub Categorys
+    Route::get('/admin/subcategory', [SubcategoryController::class, 'index'])->name('subcategory.index');
+    Route::post('/admin/subcategory/store', [SubcategoryController::class, 'store'])->name('subcategory.store');
+    Route::get('/admin/subcategory/edit/{id}', [SubcategoryController::class, 'edit'])->name('subcategory.edit');
+    Route::post('/admin/subcategory/update/{id}', [SubcategoryController::class, 'update'])->name('subcategory.update');
+    Route::get('/admin/subcategory/delete/{id}', [SubcategoryController::class, 'destroy'])->name('subcategory.delete');
 
 });
 
