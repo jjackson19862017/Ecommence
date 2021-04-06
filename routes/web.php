@@ -5,6 +5,7 @@ use App\Http\Controllers\MainUserController;
 use App\Http\Controllers\MainAdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\BrandController;
 use Illuminate\Support\Facades\Route;
 
@@ -78,6 +79,13 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->group(function(){
     Route::get('/admin/subcategory/edit/{id}', [SubcategoryController::class, 'edit'])->name('subcategory.edit');
     Route::post('/admin/subcategory/update/{id}', [SubcategoryController::class, 'update'])->name('subcategory.update');
     Route::get('/admin/subcategory/delete/{id}', [SubcategoryController::class, 'destroy'])->name('subcategory.delete');
+
+    //Coupons
+    Route::get('/admin/coupon', [CouponController::class, 'index'])->name('coupon.index');
+    Route::post('/admin/coupon/store', [CouponController::class, 'store'])->name('coupon.store');
+    Route::get('/admin/coupon/edit/{id}', [CouponController::class, 'edit'])->name('coupon.edit');
+    Route::post('/admin/coupon/update/{id}', [CouponController::class, 'update'])->name('coupon.update');
+    Route::get('/admin/coupon/delete/{id}', [CouponController::class, 'destroy'])->name('coupon.delete');
 
 });
 
