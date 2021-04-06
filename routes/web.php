@@ -6,6 +6,7 @@ use App\Http\Controllers\MainAdminController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\BrandController;
 use Illuminate\Support\Facades\Route;
 
@@ -87,7 +88,16 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->group(function(){
     Route::post('/admin/coupon/update/{id}', [CouponController::class, 'update'])->name('coupon.update');
     Route::get('/admin/coupon/delete/{id}', [CouponController::class, 'destroy'])->name('coupon.delete');
 
+    //Newsletter
+    Route::get('/admin/newsletter', [NewsletterController::class, 'index'])->name('newsletter.index');
+    Route::post('/admin/newsletter/store', [NewsletterController::class, 'store'])->name('newsletter.store');
+    Route::get('/admin/newsletter/edit/{id}', [NewsletterController::class, 'edit'])->name('newsletter.edit');
+    Route::post('/admin/newsletter/update/{id}', [NewsletterController::class, 'update'])->name('newsletter.update');
+    Route::get('/admin/newsletter/delete/{id}', [NewsletterController::class, 'destroy'])->name('newsletter.delete');
+
 });
 
-
+// Front end Routes
+Route::post('/admin/newsletter/store', [NewsletterController::class, 'store'])->name('newsletter.store');
+Route::post('/admin/newsletter/unsub', [NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
 require __DIR__ . '/auth.php';
