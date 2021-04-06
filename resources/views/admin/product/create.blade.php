@@ -4,7 +4,7 @@
     <div class="py-12">
         <div class="container">
             <div class="card pd-20 pd-sm-40">
-                <h6 class="card-body-title">New Product</h6>
+                <h6 class="card-body-title">New Product <a href="{{route('product.index')}}" class="btn btn-success btn-sm pull-right">All Products</a></h6>
                 <p class="mg-b-20 mg-sm-b-30">New Product Add Form</p>
                 <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
@@ -23,7 +23,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label">Product Code: <span
                                             class="tx-danger">*</span></label>
-                                    <input class="form-control" type="text" name="product_code" value="McDoe"
+                                    <input class="form-control" type="text" name="product_code"
                                            placeholder="Enter Product Code">
                                 </div>
                             </div><!-- col-4 -->
@@ -98,7 +98,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="form-control-label">Product Details: <span class="tx-danger">*</span></label>
-                                    <input class="form-control" name="product_detail" id="summernote">
+                                    <textarea class="form-control" name="product_detail" id="summernote"> </textarea>
                                 </div>
                             </div><!-- col-12 -->
                             <div class="col-lg-12">
@@ -112,7 +112,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label">Image One (Main Thumbnail):</label>
                                     <label class="custom-file">
-                                        <input type="file" id="file" class="custom-file-input" name="image_one" onchange="readURL1(this);">
+                                        <input type="file" id="file" class="custom-file-input" name="image_one" onchange="readURL1(this);" required="">
                                         <span class="custom-file-control"></span>
                                         <img src="#" id="one" alt="">
                                     </label>
@@ -122,7 +122,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label">Image Two:</label>
                                     <label class="custom-file">
-                                        <input type="file" id="file" class="custom-file-input" name="image_two" onchange="readURL2(this);">
+                                        <input type="file" id="file" class="custom-file-input" name="image_two" onchange="readURL2(this);" required="">
                                         <span class="custom-file-control"></span>
                                         <img src="#" id="two" alt="">
                                     </label>
@@ -132,7 +132,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label">Image Three:</label>
                                     <label class="custom-file">
-                                        <input type="file" id="file" class="custom-file-input" name="image_three" onchange="readURL3(this);">
+                                        <input type="file" id="file" class="custom-file-input" name="image_three" onchange="readURL3(this);" required="">
                                         <span class="custom-file-control"></span>
                                         <img src="#" id="three" alt="">
                                     </label>
@@ -241,8 +241,8 @@
                     reader.onload = function (e) {
                         $('#one')
                             .attr('src', e.target.result)
-                            .width(80)
-                            .height(80);
+                            .width(100)
+                            .height(100);
                     };
                     reader.readAsDataURL(input.files[0]);
                 }
@@ -256,8 +256,8 @@
                     reader.onload = function (e) {
                         $('#two')
                             .attr('src', e.target.result)
-                            .width(80)
-                            .height(80);
+                            .width(100)
+                            .height(100);
                     };
                     reader.readAsDataURL(input.files[0]);
                 }
@@ -271,8 +271,8 @@
                     reader.onload = function (e) {
                         $('#three')
                             .attr('src', e.target.result)
-                            .width(80)
-                            .height(80);
+                            .width(100)
+                            .height(100);
                     };
                     reader.readAsDataURL(input.files[0]);
                 }
