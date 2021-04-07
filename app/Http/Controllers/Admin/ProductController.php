@@ -60,7 +60,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
-
+$data = [];
         $data['category_id'] = $request->category_id;
         $data['subcategory_id'] = $request->subcategory_id;
         $data['brand_id'] = $request->brand_id;
@@ -154,9 +154,11 @@ class ProductController extends Controller
      * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
         //
+        $product = Product::find($id);
+        return view('admin.product.edit',compact('product'));
     }
 
     /**
@@ -166,9 +168,153 @@ class ProductController extends Controller
      * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
         //
+        $data = [];
+        $data['category_id'] = $request->category_id;
+        $data['subcategory_id'] = $request->subcategory_id;
+        $data['brand_id'] = $request->brand_id;
+        $data['product_name'] = $request->product_name;
+        $data['product_code'] = $request->product_code;
+        $data['product_quantity'] = $request->product_quantity;
+        $data['product_detail'] = $request->product_detail;
+        $data['product_colour'] = $request->product_colour;
+        $data['product_size'] = $request->product_size;
+        $data['selling_price'] = $request->selling_price;
+        $data['discount_price'] = $request->discount_price;
+
+        $data['video_link'] = $request->video_link;
+        $data['main_slider'] = $request->main_slider;
+        $data['hot_deal'] = $request->hot_deal;
+        $data['best_rated'] = $request->best_rated;
+        $data['mid_slider'] = $request->mid_slider;
+        $data['hot_new'] = $request->hot_new;
+        $data['trend'] = $request->trend;
+
+
+        $update = DB::table('products')->where('id',$id)->update($data);
+        if ($update) {
+            $notification = array(
+                'message' => 'Product Updated Successfully',
+                'alert-type' => 'success'
+            );
+        } else {
+            $notification = array(
+                'message' => 'Nothing to update',
+                'alert-type' => 'error'
+            );
+        }
+
+        return redirect()->route('product.index')->with($notification);
+    }
+
+    public function imageupdate(Request $request, $id)
+    {
+        //
+        $old_image1 = $request->old_image1;
+        $old_image2 = $request->old_image2;
+        $old_image3 = $request->old_image3;
+
+        // Upload Image
+        $new_image_one = $request->file('image_one');
+        $new_image_two = $request->file('image_two');
+        $new_image_three = $request->file('image_three');
+
+        if ($new_image_one) {
+           // Remove Image
+            unlink($old_image1);
+
+            $image_name = hexdec(uniqid());
+            $ext = strtolower($new_image_one->getClientOriginalExtension());
+            $image_full_name = $image_name. '.'. $ext;
+            $upload_path = 'upload/product/';
+            $image_url = $upload_path.$image_full_name;
+            $success = $new_image_one->move($upload_path,$image_full_name);
+
+
+
+            // Upload Image With Intervention Package
+//            $name_gen = hexdec(uniqid()) . '.' . $new_image_one->getClientOriginalExtension();
+//            Image::make($new_image_one)->resize(300, 300)->save('upload/product/' . $name_gen);
+//
+//            $last_img = 'upload/product/' . $name_gen;
+
+            $update = Product::find($id)->update([
+                'image_one' => $image_url,
+            ]);
+            if($update){
+                $notification = array(
+                    'message' => 'Image Updated Successfully',
+                    'alert-type' => 'success'
+                );
+            }
+
+        }
+        if ($new_image_two) {
+            // Remove Image
+            unlink($old_image2);
+
+            $image_name = hexdec(uniqid());
+            $ext = strtolower($new_image_two->getClientOriginalExtension());
+            $image_full_name = $image_name. '.'. $ext;
+            $upload_path = 'upload/product/';
+            $image_url = $upload_path.$image_full_name;
+            $success = $new_image_two->move($upload_path,$image_full_name);
+
+
+
+            // Upload Image With Intervention Package
+//            $name_gen = hexdec(uniqid()) . '.' . $new_image_one->getClientOriginalExtension();
+//            Image::make($new_image_one)->resize(300, 300)->save('upload/product/' . $name_gen);
+//
+//            $last_img = 'upload/product/' . $name_gen;
+
+            $update = Product::find($id)->update([
+                'image_two' => $image_url,
+            ]);
+            if($update){
+                $notification = array(
+                    'message' => 'Image Updated Successfully',
+                    'alert-type' => 'success'
+                );
+            }
+
+        }
+        if ($new_image_three) {
+            // Remove Image
+            unlink($old_image3);
+
+            $image_name = hexdec(uniqid());
+            $ext = strtolower($new_image_three->getClientOriginalExtension());
+            $image_full_name = $image_name. '.'. $ext;
+            $upload_path = 'upload/product/';
+            $image_url = $upload_path.$image_full_name;
+            $success = $new_image_three->move($upload_path,$image_full_name);
+
+
+
+            // Upload Image With Intervention Package
+//            $name_gen = hexdec(uniqid()) . '.' . $new_image_one->getClientOriginalExtension();
+//            Image::make($new_image_one)->resize(300, 300)->save('upload/product/' . $name_gen);
+//
+//            $last_img = 'upload/product/' . $name_gen;
+
+            $update = Product::find($id)->update([
+                'image_three' => $image_url,
+            ]);
+            if($update){
+                $notification = array(
+                    'message' => 'Image Updated Successfully',
+                    'alert-type' => 'success'
+                );
+            }
+
+        }
+
+
+
+        return redirect()->route('product.index')->with($notification);
     }
 
     /**

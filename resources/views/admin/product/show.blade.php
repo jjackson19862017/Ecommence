@@ -4,8 +4,8 @@
     <div class="py-12">
         <div class="container">
             <div class="card pd-20 pd-sm-40">
-                <h6 class="card-body-title">{{$product->product_name}} <a href="{{route('product.index')}}" class="btn btn-success btn-sm pull-right">All Products</a></h6>
-                <p class="mg-b-20 mg-sm-b-30">{{$product->category_name}} <i class="fa fa-arrow-right"></i> {{$product->subcategory_name}}</p>
+                <h6 class="card-body-title">{{$product->product_name}} <a href="{{route('product.edit',$product->id)}}" class="btn btn-sm btn-info pull-right" title="Edit"><i class="fa fa-edit"></i></a> <a href="{{route('product.index')}}" class="btn btn-success btn-sm pull-right">All Products</a></h6>
+
                 <div class="form-layout">
                     <div class="row mg-b-25">
                         <div class="col-lg-4">
@@ -58,8 +58,7 @@
                         </div><!-- col-4 -->
                         <div class="col-lg-4">
                             <div class="form-group">
-                                <label class="form-control-label">Selling Price: <span
-                                        class="tx-danger">*</span></label>
+                                <label class="form-control-label">Selling Price: </label>
                                 <br><strong>{{$product->selling_price}}</strong>
                             </div>
                         </div><!-- col-4 -->

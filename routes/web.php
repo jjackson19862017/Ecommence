@@ -103,6 +103,7 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->group(function(){
     Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
     Route::get('/admin/product/show/{id}', [ProductController::class, 'show'])->name('product.show');
     Route::post('/admin/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::post('/admin/product/update/{id}/image', [ProductController::class, 'imageupdate'])->name('product.imageupdate');
     Route::get('/admin/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
     Route::get('/admin/product/inactive/{id}', [ProductController::class, 'inactive'])->name('product.inactive');
     Route::get('/admin/product/active/{id}', [ProductController::class, 'active'])->name('product.active');
