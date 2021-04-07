@@ -107,7 +107,7 @@ class ProductController extends Controller
             'type' => 'success',
         );
 
-        return redirect()->route('product.index')->with($notification);
+        return back()->with($notification);
     }
 
     public function inactive($id){
@@ -168,8 +168,20 @@ class ProductController extends Controller
      * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+
+        // Deletes the image off the public folder
+        unlink(Product::find($id)->value('image_one'));
+        unlink(Product::find($id)->value('image_two'));
+        unlink(Product::find($id)->value('image_three'));
+
+        $delete = Product::find($id)->delete();
+        $notification = array(
+            'message' => 'Product Deleted Successfully',
+            'alert-type' => 'success'
+        );
+        return back()->with($notification);
+
     }
 }
