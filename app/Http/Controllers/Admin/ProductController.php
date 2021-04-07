@@ -21,7 +21,13 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $products = Product::all();
+        $products = DB::table('products')
+            ->join('categories','products.category_id','categories.id')
+            ->join('subcategories','products.subcategory_id','subcategories.id')
+            ->join('brands','products.brand_id','brands.id')
+            ->select('products.*','categories.category_name','subcategories.subcategory_name','brands.brand_name')
+            ->get();
+
         return view('admin.product.product', compact('products'));
     }
 
@@ -102,6 +108,24 @@ class ProductController extends Controller
         );
 
         return redirect()->route('product.index')->with($notification);
+    }
+
+    public function inactive($id){
+        DB::table('products')->where('id',$id)->update(['status'=>0]);
+        $notification = array(
+            'message' => 'Product is now inactive',
+            'alert-type' => 'success',
+        );
+        return back()->with($notification);
+    }
+
+    public function active($id){
+        DB::table('products')->where('id',$id)->update(['status'=>1]);
+        $notification = array(
+            'message' => 'Product is now active',
+            'alert-type' => 'success',
+        );
+        return back()->with($notification);
     }
 
     /**

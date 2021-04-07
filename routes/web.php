@@ -101,8 +101,11 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->group(function(){
     Route::get('/admin/product/add', [ProductController::class, 'create'])->name('product.add');
     Route::post('/admin/product/store', [ProductController::class, 'store'])->name('product.store');
     Route::get('/admin/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::get('/admin/product/show/{id}', [ProductController::class, 'show'])->name('product.show');
     Route::post('/admin/product/update/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::get('/admin/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+    Route::get('/admin/product/inactive/{id}', [ProductController::class, 'inactive'])->name('product.inactive');
+    Route::get('/admin/product/active/{id}', [ProductController::class, 'active'])->name('product.active');
 
     // Ajax Requests
     route::get('/get/subcategory/{category_id}', [ProductController::class,'getsubcat']);
