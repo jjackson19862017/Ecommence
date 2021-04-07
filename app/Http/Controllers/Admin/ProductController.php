@@ -71,7 +71,7 @@ $data = [];
         $data['product_colour'] = $request->product_colour;
         $data['product_size'] = $request->product_size;
         $data['selling_price'] = $request->selling_price;
-
+        $data['discount_price'] = $request->discount_price;
         $data['video_link'] = $request->video_link;
         $data['main_slider'] = $request->main_slider;
         $data['hot_deal'] = $request->hot_deal;

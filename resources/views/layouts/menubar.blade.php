@@ -1,4 +1,6 @@
-
+@php
+    $categorys = DB::table('categories')->orderBy('category_name','asc')->get();
+@endphp
 
 <!-- Main Navigation -->
 
@@ -18,31 +20,22 @@
                         </div>
 
                         <ul class="cat_menu">
-                            <li><a href="#">Computers & Laptops <i class="fas fa-chevron-right ml-auto"></i></a></li>
-                            <li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li>
-                            <li class="hassubs">
-                                <a href="#">Hardware<i class="fas fa-chevron-right"></i></a>
-                                <ul>
-                                    <li class="hassubs">
-                                        <a href="#">Menu Item<i class="fas fa-chevron-right"></i></a>
-                                        <ul>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                            <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                    <li><a href="#">Menu Item<i class="fas fa-chevron-right"></i></a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Smartphones & Tablets<i class="fas fa-chevron-right"></i></a></li>
-                            <li><a href="#">TV & Audio<i class="fas fa-chevron-right"></i></a></li>
-                            <li><a href="#">Gadgets<i class="fas fa-chevron-right"></i></a></li>
-                            <li><a href="#">Car Electronics<i class="fas fa-chevron-right"></i></a></li>
-                            <li><a href="#">Video Games & Consoles<i class="fas fa-chevron-right"></i></a></li>
-                            <li><a href="#">Accessories<i class="fas fa-chevron-right"></i></a></li>
+                            @foreach($categorys as $cat)
+                                <li class="hassubs">
+                                    <a href="#">{{$cat->category_name}}<i class="fas fa-chevron-right"></i></a>
+                                    <ul>
+                                        @php
+                                            $subcat = DB::table('subcategories')->where('category_id',$cat->id)->get();
+                                        @endphp
+
+                                        @foreach($subcat as $item)
+                                            <li class="hassubs">
+                                                <a href="#">{{$item->subcategory_name}}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
 
@@ -128,7 +121,8 @@
 
                     <div class="page_menu_search">
                         <form action="#">
-                            <input type="search" required="required" class="page_menu_search_input" placeholder="Search for products...">
+                            <input type="search" required="required" class="page_menu_search_input"
+                                   placeholder="Search for products...">
                         </form>
                     </div>
                     <ul class="page_menu_nav">
@@ -190,12 +184,20 @@
                             </ul>
                         </li>
                         <li class="page_menu_item"><a href="blog.html">blog<i class="fa fa-angle-down"></i></a></li>
-                        <li class="page_menu_item"><a href="contact.html">contact<i class="fa fa-angle-down"></i></a></li>
+                        <li class="page_menu_item"><a href="contact.html">contact<i class="fa fa-angle-down"></i></a>
+                        </li>
                     </ul>
 
                     <div class="menu_contact">
-                        <div class="menu_contact_item"><div class="menu_contact_icon"><img src="{{asset('frontend/images/phone_white.png')}}" alt=""></div>+38 068 005 3570</div>
-                        <div class="menu_contact_item"><div class="menu_contact_icon"><img src="{{asset('frontend/images/mail_white.png')}}" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
+                        <div class="menu_contact_item">
+                            <div class="menu_contact_icon"><img src="{{asset('frontend/images/phone_white.png')}}"
+                                                                alt=""></div>
+                            +38 068 005 3570
+                        </div>
+                        <div class="menu_contact_item">
+                            <div class="menu_contact_icon"><img src="{{asset('frontend/images/mail_white.png')}}"
+                                                                alt=""></div>
+                            <a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
                     </div>
                 </div>
             </div>
@@ -208,7 +210,8 @@
 <!-- Banner -->
 
 <div class="banner">
-    <div class="banner_background" style="background-image:url({{asset('frontend/images/banner_background.jpg')}})"></div>
+    <div class="banner_background"
+         style="background-image:url({{asset('frontend/images/banner_background.jpg')}})"></div>
     <div class="container fill_height">
         <div class="row fill_height">
             <div class="banner_product_image"><img src="{{asset('frontend/images/banner_product.png')}}" alt=""></div>

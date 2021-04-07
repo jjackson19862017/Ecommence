@@ -89,13 +89,14 @@
                                             <div class="custom_dropdown_list">
                                                 <span class="custom_dropdown_placeholder clc">All Categories</span>
                                                 <i class="fas fa-chevron-down"></i>
+                                                @php
+                                                    $categorys = DB::table('categories')->orderBy('category_name','asc')->get();
+                                                @endphp
                                                 <ul class="custom_list clc">
                                                     <li><a class="clc" href="#">All Categories</a></li>
-                                                    <li><a class="clc" href="#">Computers</a></li>
-                                                    <li><a class="clc" href="#">Laptops</a></li>
-                                                    <li><a class="clc" href="#">Cameras</a></li>
-                                                    <li><a class="clc" href="#">Hardware</a></li>
-                                                    <li><a class="clc" href="#">Smartphones</a></li>
+                                                    @foreach($categorys as $cat)
+                                                        <li><a class="clc" href="#">{{$cat->category_name}}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>
