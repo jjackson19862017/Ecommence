@@ -89,75 +89,78 @@ $hot = DB::table('products')
                             <!-- Deals Slider -->
                             <div class="owl-carousel owl-theme deals_slider">
 
-                                @foreach($hot as $item)
+                            @foreach($hot as $item)
                                 <!-- Deals Item -->
-                                <div class="owl-item deals_item">
-                                    <div class="deals_image"><img src="{{asset($item->image_one)}}" alt="">
-                                    </div>
-                                    <div class="deals_content">
-                                        <div class="deals_info_line d-flex flex-row justify-content-start">
-                                            <div class="deals_item_category"><a href="#">{{$item->brand_name}}</a></div>
+                                    <div class="owl-item deals_item">
+                                        <div class="deals_image"><img src="{{asset($item->image_one)}}" alt="">
+                                        </div>
+                                        <div class="deals_content">
+                                            <div class="deals_info_line d-flex flex-row justify-content-start">
+                                                <div class="deals_item_category"><a href="#">{{$item->brand_name}}</a>
+                                                </div>
 
-                                            @if($item->discount_price == NULL)
+                                                @if($item->discount_price == NULL)
                                                 @else
-                                                <div class="deals_item_price_a ml-auto">£{{$item->selling_price}}</div>
+                                                    <div class="deals_item_price_a ml-auto">
+                                                        £{{$item->selling_price}}</div>
 
-                                            @endif
-
-
-
-
-                                        </div>
-                                        <div class="deals_info_line d-flex flex-row justify-content-start">
-                                            <div class="deals_item_name">{{$item->product_name}}</div>
-
-                                            @if($item->discount_price == NULL)
-                                                <div class="deals_item_price ml-auto">£{{$item->selling_price}}</div>
-                                            @else
+                                                @endif
 
 
-                                            @endif
-
-                                            @if($item->discount_price != NULL)
-                                                <div class="deals_item_price ml-auto">£{{$item->discount_price}}</div>
-                                            @else
-
-
-                                            @endif
-
-                                        </div>
-                                        <div class="available">
-                                            <div class="available_line d-flex flex-row justify-content-start">
-                                                <div class="available_title">Available: <span>{{$item->product_quantity}}</span></div>
-                                                <div class="sold_title ml-auto">Already sold: <span>28</span></div>
                                             </div>
-                                            <div class="available_bar"><span style="width:17%"></span></div>
-                                        </div>
-                                        <div
-                                            class="deals_timer d-flex flex-row align-items-center justify-content-start">
-                                            <div class="deals_timer_title_container">
-                                                <div class="deals_timer_title">Hurry Up</div>
-                                                <div class="deals_timer_subtitle">Offer ends in:</div>
+                                            <div class="deals_info_line d-flex flex-row justify-content-start">
+                                                <div class="deals_item_name">{{$item->product_name}}</div>
+
+                                                @if($item->discount_price == NULL)
+                                                    <div class="deals_item_price ml-auto">
+                                                        £{{$item->selling_price}}</div>
+                                                @else
+
+
+                                                @endif
+
+                                                @if($item->discount_price != NULL)
+                                                    <div class="deals_item_price ml-auto">
+                                                        £{{$item->discount_price}}</div>
+                                                @else
+
+
+                                                @endif
+
                                             </div>
-                                            <div class="deals_timer_content ml-auto">
-                                                <div class="deals_timer_box clearfix" data-target-time="">
-                                                    <div class="deals_timer_unit">
-                                                        <div id="deals_timer1_hr" class="deals_timer_hr"></div>
-                                                        <span>hours</span>
-                                                    </div>
-                                                    <div class="deals_timer_unit">
-                                                        <div id="deals_timer1_min" class="deals_timer_min"></div>
-                                                        <span>mins</span>
-                                                    </div>
-                                                    <div class="deals_timer_unit">
-                                                        <div id="deals_timer1_sec" class="deals_timer_sec"></div>
-                                                        <span>secs</span>
+                                            <div class="available">
+                                                <div class="available_line d-flex flex-row justify-content-start">
+                                                    <div class="available_title">Available:
+                                                        <span>{{$item->product_quantity}}</span></div>
+                                                    <div class="sold_title ml-auto">Already sold: <span>28</span></div>
+                                                </div>
+                                                <div class="available_bar"><span style="width:17%"></span></div>
+                                            </div>
+                                            <div
+                                                class="deals_timer d-flex flex-row align-items-center justify-content-start">
+                                                <div class="deals_timer_title_container">
+                                                    <div class="deals_timer_title">Hurry Up</div>
+                                                    <div class="deals_timer_subtitle">Offer ends in:</div>
+                                                </div>
+                                                <div class="deals_timer_content ml-auto">
+                                                    <div class="deals_timer_box clearfix" data-target-time="">
+                                                        <div class="deals_timer_unit">
+                                                            <div id="deals_timer1_hr" class="deals_timer_hr"></div>
+                                                            <span>hours</span>
+                                                        </div>
+                                                        <div class="deals_timer_unit">
+                                                            <div id="deals_timer1_min" class="deals_timer_min"></div>
+                                                            <span>mins</span>
+                                                        </div>
+                                                        <div class="deals_timer_unit">
+                                                            <div id="deals_timer1_sec" class="deals_timer_sec"></div>
+                                                            <span>secs</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
                                 @endforeach
 
@@ -402,60 +405,24 @@ $hot = DB::table('products')
                 </div>
 
                 <!-- Popular Categories Slider -->
-
+                @php
+                    $popular = DB::table('categories')->get();
+                @endphp
                 <div class="col-lg-9">
                     <div class="popular_categories_slider_container">
                         <div class="owl-carousel owl-theme popular_categories_slider">
 
                             <!-- Popular Categories Item -->
-                            <div class="owl-item">
-                                <div
-                                    class="popular_category d-flex flex-column align-items-center justify-content-center">
-                                    <div class="popular_category_image"><img
-                                            src="{{asset('frontend/images/popular_1.png')}}" alt=""></div>
-                                    <div class="popular_category_text">Smartphones & Tablets</div>
+                            @foreach($popular as $item)
+                                <div class="owl-item">
+                                    <div
+                                        class="popular_category d-flex flex-column align-items-center justify-content-center">
+                                        <div class="popular_category_image"><h1><i class="fa fa-columns"></i></h1></div>
+                                        <div class="popular_category_text">{{$item->category_name}}</div>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <!-- Popular Categories Item -->
-                            <div class="owl-item">
-                                <div
-                                    class="popular_category d-flex flex-column align-items-center justify-content-center">
-                                    <div class="popular_category_image"><img
-                                            src="{{asset('frontend/images/popular_2.png')}}" alt=""></div>
-                                    <div class="popular_category_text">Computers & Laptops</div>
-                                </div>
-                            </div>
-
-                            <!-- Popular Categories Item -->
-                            <div class="owl-item">
-                                <div
-                                    class="popular_category d-flex flex-column align-items-center justify-content-center">
-                                    <div class="popular_category_image"><img
-                                            src="{{asset('frontend/images/popular_3.png')}}" alt=""></div>
-                                    <div class="popular_category_text">Gadgets</div>
-                                </div>
-                            </div>
-
-                            <!-- Popular Categories Item -->
-                            <div class="owl-item">
-                                <div
-                                    class="popular_category d-flex flex-column align-items-center justify-content-center">
-                                    <div class="popular_category_image"><img
-                                            src="{{asset('frontend/images/popular_4.png')}}" alt=""></div>
-                                    <div class="popular_category_text">Video Games & Consoles</div>
-                                </div>
-                            </div>
-
-                            <!-- Popular Categories Item -->
-                            <div class="owl-item">
-                                <div
-                                    class="popular_category d-flex flex-column align-items-center justify-content-center">
-                                    <div class="popular_category_image"><img
-                                            src="{{asset('frontend/images/popular_5.png')}}" alt=""></div>
-                                    <div class="popular_category_text">Accessories</div>
-                                </div>
-                            </div>
+                            @endforeach
 
                         </div>
                     </div>
@@ -476,91 +443,44 @@ $hot = DB::table('products')
             <div class="owl-carousel owl-theme banner_2_slider">
 
                 <!-- Banner 2 Slider Item -->
-                <div class="owl-item">
-                    <div class="banner_2_item">
-                        <div class="container fill_height">
-                            <div class="row fill_height">
-                                <div class="col-lg-4 col-md-6 fill_height">
-                                    <div class="banner_2_content">
-                                        <div class="banner_2_category">Laptops</div>
-                                        <div class="banner_2_title">MacBook Air 13</div>
-                                        <div class="banner_2_text">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                            elit. Maecenas fermentum laoreet.
-                                        </div>
-                                        <div class="rating_r rating_r_4 banner_2_rating">
-                                            <i></i><i></i><i></i><i></i><i></i></div>
-                                        <div class="button banner_2_button"><a href="#">Explore</a></div>
-                                    </div>
+                @php
 
-                                </div>
-                                <div class="col-lg-8 col-md-6 fill_height">
-                                    <div class="banner_2_image_container">
-                                        <div class="banner_2_image"><img
-                                                src="{{asset('frontend/images/banner_2_product.png')}}" alt=""></div>
+                    $mid_slider = DB::table('products')
+        ->join('categories','products.category_id','categories.id')
+        ->join('brands','products.brand_id','brands.id')
+        ->select('products.*','categories.category_name','brands.brand_name')
+        ->whereStatus(1)->whereMidSlider(1)->limit(3)->get();
+
+                @endphp
+                @foreach($mid_slider as $item)
+                    <div class="owl-item">
+                        <div class="banner_2_item">
+                            <div class="container fill_height">
+                                <div class="row fill_height">
+                                    <div class="col-lg-4 col-md-6 fill_height">
+                                        <div class="banner_2_content">
+                                            <div class="banner_2_category"><h4>{{$item->category_name}}</h4></div>
+                                            <div class="banner_2_title">{{$item->product_name}}</div>
+                                            <div class="banner_2_text"><h4>{{$item->brand_name}}</h4> <br> <h2>£{{$item->selling_price}}</h2>
+                                            </div>
+                                            <div class="rating_r rating_r_4 banner_2_rating">
+                                                <i></i><i></i><i></i><i></i><i></i></div>
+                                            <div class="button banner_2_button"><a href="#">Explore</a></div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-8 col-md-6 fill_height">
+                                        <div class="banner_2_image_container">
+                                            <div class="banner_2_image"><img
+                                                    src="{{asset($item->image_one)}}" style="height:300px; width:250px;" alt=""></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
 
-                <!-- Banner 2 Slider Item -->
-                <div class="owl-item">
-                    <div class="banner_2_item">
-                        <div class="container fill_height">
-                            <div class="row fill_height">
-                                <div class="col-lg-4 col-md-6 fill_height">
-                                    <div class="banner_2_content">
-                                        <div class="banner_2_category">Laptops</div>
-                                        <div class="banner_2_title">MacBook Air 13</div>
-                                        <div class="banner_2_text">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                            elit. Maecenas fermentum laoreet.
-                                        </div>
-                                        <div class="rating_r rating_r_4 banner_2_rating">
-                                            <i></i><i></i><i></i><i></i><i></i></div>
-                                        <div class="button banner_2_button"><a href="#">Explore</a></div>
-                                    </div>
-
-                                </div>
-                                <div class="col-lg-8 col-md-6 fill_height">
-                                    <div class="banner_2_image_container">
-                                        <div class="banner_2_image"><img
-                                                src="{{asset('frontend/images/banner_2_product.png')}}" alt=""></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Banner 2 Slider Item -->
-                <div class="owl-item">
-                    <div class="banner_2_item">
-                        <div class="container fill_height">
-                            <div class="row fill_height">
-                                <div class="col-lg-4 col-md-6 fill_height">
-                                    <div class="banner_2_content">
-                                        <div class="banner_2_category">Laptops</div>
-                                        <div class="banner_2_title">MacBook Air 13</div>
-                                        <div class="banner_2_text">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                            elit. Maecenas fermentum laoreet.
-                                        </div>
-                                        <div class="rating_r rating_r_4 banner_2_rating">
-                                            <i></i><i></i><i></i><i></i><i></i></div>
-                                        <div class="button banner_2_button"><a href="#">Explore</a></div>
-                                    </div>
-
-                                </div>
-                                <div class="col-lg-8 col-md-6 fill_height">
-                                    <div class="banner_2_image_container">
-                                        <div class="banner_2_image"><img
-                                                src="{{asset('frontend/images/banner_2_product.png')}}" alt=""></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </div>
